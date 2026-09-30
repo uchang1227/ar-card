@@ -1,7 +1,9 @@
 * { box-sizing: border-box; }
-html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #000; }
-#video { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; }
+html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #111; }
+#video { position: fixed; inset: 0; z-index: 0; display: block; width: 100vw; height: 100dvh; object-fit: cover; background: #111; }
 #canvas { display: none; }
 #status { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 20; min-width: 230px; padding: 12px 16px; border-radius: 10px; background: rgba(0,0,0,.75); color: #fff; text-align: center; font: 600 14px -apple-system,BlinkMacSystemFont,sans-serif; pointer-events: none; }
+#startButton { position: fixed; z-index: 30; left: 50%; top: 50%; transform: translate(-50%,-50%); padding: 14px 22px; border: 0; border-radius: 10px; background: #fff; color: #111; font-size: 16px; }
+#startButton[hidden] { display: none; }
 #illustration { position: fixed; z-index: 10; left: 50%; top: 50%; width: min(65vw, 280px); height: min(65vw, 280px); object-fit: contain; transform: translate(-50%,-50%); opacity: 0; pointer-events: none; }
 #illustration.show { opacity: 1; }

@@ -7,8 +7,9 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <video id="video" autoplay playsinline muted></video>
+  <video id="video" autoplay muted playsinline webkit-playsinline></video>
   <canvas id="canvas" aria-hidden="true"></canvas>
+  <button id="startButton" type="button">カメラを開始</button>
   <div id="status" role="status">カメラを起動中…</div>
   <img id="illustration" src="illustration.png" alt="" />
   <img id="markerImg" src="marker.png" alt="" hidden />
