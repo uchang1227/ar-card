@@ -1,31 +1,46 @@
-const status = document.getElementById('status');
+const statusEl = document.getElementById('status');
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
 
-function updateStatus(message) {
-  status.textContent = message;
+function updateStatus(msg) {
+    statusEl.textContent = msg;
+    console.log(msg);
 }
 
-const scene = document.getElementById('scene');
+// Canvas をウィンドウサイズに合わせる
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
 
-scene.addEventListener('loaded', () => {
-  updateStatus('読み込み完了。マーカーを探しています...');
-});
-
-const marker = document.querySelector('a-marker');
-
-if (marker) {
-  marker.addEventListener('markerFound', () => {
-    updateStatus('マーカーを認識しました');
-  });
-
-  marker.addEventListener('markerLost', () => {
-    updateStatus('マーカーを見失いました');
-  });
+// ビデオキャプチャ開始
+async function startCamera() {
+    try {
+        updateStatus('カメラを起動中...');
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } },
+            audio: false
+        });
+        video.srcObject = stream;
+        video.play();
+        updateStatus('カメラ起動完了 - マーカーを探索中...')
+        video.addEventListener('loadedmetadata', () => {
+            updateStatus('カメラ準備完了');
+            renderLoop();
+        }, { once: true });
+    } catch (err) {
+        updateStatus('❌ カメラエラー: ' + err.message);
+        console.error(err);
+    }
 }
 
-navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
-  .then(() => {
-    updateStatus('カメラを起動しました');
-  })
-  .catch(() => {
-    updateStatus('カメラの許可が必要です');
-  });
+// レンダリングループ
+function renderLoop() {
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    requestAnimationFrame(renderLoop);
+}
+
+startCamera();

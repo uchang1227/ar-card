@@ -1,42 +1,21 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
+<head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <title>AR Card</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.4.5/aframe/build/aframe-ar.js"></script>
-  </head>
-  <body>
-    <div id="status" class="status">カメラを起動しています...</div>
+</head>
+<body>
+    <div id="status">初期化中...</div>
+    <video id="video" playsinline></video>
+    <canvas id="canvas"></canvas>
 
-    <a-scene
-      id="scene"
-      embedded
-      arjs="sourceType: webcam; debugUIEnabled: true; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
-      vr-mode-ui="enabled: false"
-      renderer="antialias: true; alpha: true; precision: medium;"
-    >
-      <a-marker preset="hiro" type="pattern" smooth="true" smoothCount="10" smoothTolerance="0.01" smoothThreshold="5">
-        <a-plane
-          position="0 0 0"
-          rotation="-90 0 0"
-          width="1.8"
-          height="1.8"
-          material="transparent: true; opacity: 1; depthTest: false"
-        >
-          <a-image
-            src="illustration.png"
-            position="0 0 0.01"
-            width="1.6"
-            height="1.6"
-          ></a-image>
-        </a-plane>
-      </a-marker>
-      <a-entity camera></a-entity>
-    </a-scene>
-
+    <script async src="https://cdn.jsdelivr.net/npm/three@r128/build/three.min.js"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/three@r128/examples/js/cameras/CinematicCamera.js"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.4.5/three.js/build/ar.js"></script>
     <script src="app.js"></script>
-  </body>
+</body>
 </html>
