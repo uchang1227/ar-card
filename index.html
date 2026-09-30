@@ -9,28 +9,14 @@
 </head>
 <body>
     <div id="status">初期化中...</div>
-    
-    <a-scene
-        embedded
-        arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3; labelingMode: labelingChip;"
-        vr-mode-ui="enabled: false"
-        renderer="antialias: true; alpha: true; precision: medium;"
-    >
-        <a-marker preset="hiro">
-            <a-plane
-                position="0 0 0"
-                rotation="-90 0 0"
-                width="2"
-                height="2"
-                src="illustration.png"
-                material="transparent: true; opacity: 1"
-            ></a-plane>
-        </a-marker>
-        <a-entity camera></a-entity>
-    </a-scene>
+    <video id="video" playsinline autoplay muted></video>
+    <canvas id="canvas"></canvas>
+    <img id="illustration" src="illustration.png" alt="illustration" />
+    <img id="markerImg" src="marker.png" alt="marker" style="display:none" />
 
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.4.5/aframe/build/aframe-ar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ml5@latest/dist/ml5.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
